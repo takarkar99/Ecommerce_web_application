@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <title>Product info</title>
+{% endblock title %}
+    
+
+{% block content%}
+<div class="container jumbotron mt-5">
+    {% for i in cart %}
+    <div class="row">
+        <div class="col-md-6"><br/>
+            <img src="{{ i.product.product_image.url }}" width="100%" class="img-fluid rounded" alt="Product Image">
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.product_name }}</h5>
+                    <!-- <p class="card-text">{{ product.description }}</p> -->
+                    <p class="card_text">Quantity {{i.quantity}}</p>
+                    <p class="card-text">Price: ${{ i.product.price }}</p>
+                    <p class="card-text">Price: ${{ i.product.price }}</p>
+                    <form action="{% url 'updatecart' pk=i.product_in_card_id %}" method="post">{% csrf_token %}
+                        <input type="text" id="id_quantiy" name="quantity"/>
+                        <button class="btn btn-primary" type="submit" >Update Quantity</button>
+                    </form>
+                    
+                    <form action="{% url 'deletefromcart' pk=i.product_in_card_id %}" method="post">{% csrf_token %}
+                        <button class="btn btn-danger" type="submit" >Delete</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock content %}    
+
+
+

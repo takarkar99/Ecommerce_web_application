@@ -1,0 +1,1 @@
+default_app_config = 'Product_Cart.apps.ProductCartConfig'
